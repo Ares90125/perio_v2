@@ -19,7 +19,7 @@ const NotificationList = (props:NotifyIndex) => {
         <div className="pb-10 mx-[3px]">
             <div className="flex justify-center items-center pt-4 pb-2 px-4 relatvice">
                 <p className="text-base text-mainColor  font-semibold text-center">{name+" さん"} </p>
-                <NavLink to="breshnotify" className="absolute right-0 mr-[15px]" >
+                <NavLink to="/" className="absolute right-0 mr-[15px]" >
                     <div className="bg-mainColor text-white rounded-md px-[9px] py-[8px]">
                         <p className="text-[12px] text-bold">通知設定</p>
                     </div>

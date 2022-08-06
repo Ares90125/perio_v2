@@ -22,8 +22,8 @@ const Home = () => {
             <div className=' h-full'>
                 <Routes>
                     <Route path="/patientmamage/*"  element={<PatientManager />}/>
-                    <Route path="/programmanage"  element={<Navigate to="/admin/main/programmanage/programA"/>}/>
-                    <Route path="/programmanage/*"  element={<ProgramManager/>}/>
+                    {/* <Route path="/programmanage"  element={<Navigate to="/admin/main/programmanage/programA"/>}/>
+                    <Route path="/programmanage/*"  element={<ProgramManager/>}/> */}
                 </Routes>
             </div>
         </div>

@@ -38,7 +38,7 @@ const PatientManager = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/patientedit' element={<PatientEdit />} />
             <Route path='/patientinfoedit' element={<PatientInfoEdit />} />
-            <Route path='/treatset' element={<TreatSet />} />
+            {/* <Route path='/treatset' element={<TreatSet />} /> */}
         </Routes>
     )
   }

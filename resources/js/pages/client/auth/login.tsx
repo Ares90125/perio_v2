@@ -55,6 +55,9 @@ const Login = () => {
                     dispatch(setclient(true));
                     dispatch(setname(response.data["data"]["username"]));
                     dispatch(setid(response.data["data"]["id"]));
+                    if(response.data["data"]["value"]!=null){
+                        localStorage.setItem('value','1');
+                    }
                     if(response.data["data"]["LineId"]=='0')
                     {
                         if(response.data["data"]["midpass"]!=pass){
@@ -67,7 +70,11 @@ const Login = () => {
                         }
                     }
                     else{
+                        if(response.data["data"]["change"]==1){
+                            localStorage.setItem('change','1');
+                        }
                         localStorage.setItem('lineid','1');
+                        console.log('sdfsdfd');
                         navigate('/');
                     }
                 }else{

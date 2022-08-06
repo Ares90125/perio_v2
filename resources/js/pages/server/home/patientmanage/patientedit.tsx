@@ -46,7 +46,7 @@ const PatientEdit = () => {
         { label: "画像", key: "image" },
     ];
     const [csvdata, setCsvData] = useState(Array<{
-        dataid: number;
+        dataid: string;
         patientid: string;
         name: string;
         date: string | null;
@@ -124,17 +124,18 @@ const PatientEdit = () => {
     const getcsvdate = (datas:Array<DataState>) => {
         let csv = [];
         let csvindex=0;
+        csv[csvindex] = { dataid: 'null', patientid: selectuser.userid, name: selectuser.name, timestamp: 'null',date:'null', type: "歯磨き記録", info: getstate(selectuser!.value!.toString()), image: "" };csvindex++;
         for (let i = 0; i < datas.length; i++) {
             switch(datas[i].type){
-                case 1:csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type:"起床", info: "", image: "" };
+                case 1:csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type:"起床", info: "", image: "" };
                         csvindex++;
-                        csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type:"朝のお口の状態", info: MO_STATUS[Number(datas[i].value!) - 1], image: "" };
+                        csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type:"朝のお口の状態", info: MO_STATUS[Number(datas[i].value!) - 1], image: "" };
                         csvindex++;
                         break;
-                case 2:csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "歯磨き記録", info: getstate(datas[i].value!), image: "" };csvindex++;break;
-                case 3:csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "食事の記録", info: datas[i].value!.split("|")[0], image: datas[i].value!.split("|")[1] };csvindex++;break;
-                case 4:csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "就寝", info: "", image: "" };csvindex++;break;
-                case 5:csv[csvindex] = { dataid: datas[i].id, patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "セルフ検査", info: SELF[Number(datas[i].value!.split("|")[0])-1], image: datas[i].value!.split("|")[1] };csvindex++;break;
+                case 2:csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "歯磨き記録", info: getstate(datas[i].value!), image: "" };csvindex++;break;
+                case 3:csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "食事の記録", info: datas[i].value!.split("|")[0], image: datas[i].value!.split("|")[1] };csvindex++;break;
+                case 4:csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "就寝", info: "", image: "" };csvindex++;break;
+                case 5:csv[csvindex] = { dataid: datas[i].id.toString(), patientid: selectuser.userid, name: selectuser.name, timestamp: datas[i].date?.toString() + " " + datas[i].time, date: datas[i].updated_at.split("T")[0]+" "+datas[i].updated_at.split("T")[1].substring(0,8), type: "セルフ検査", info: SELF[Number(datas[i].value!.split("|")[0])-1], image: datas[i].value!.split("|")[1] };csvindex++;break;
             }
         }
         // console.log(csv);
@@ -246,30 +247,47 @@ const PatientEdit = () => {
                         </tr>
                         {change==1?
                             <tr>
-                                <td className="text-right">
+                                <td className="text-right ">
                                     <p className="text-[16px] font-bold pr-[56px] ">
                                         パスワード
                                     </p>
                                 </td>
-                                <td>
+                                <td className="">
                                     <p className="text-[16px] font-bold text-responseColor tracking-[.25em] line-through">{password}</p>
                                 </td>
                             </tr>
                             :
                             <tr>
-                            <td className="text-right">
+                                <td className="text-right ">
+                                    <p className="text-[16px] font-bold pr-[56px] ">
+                                        パスワード
+                                    </p>
+                                </td>
+                                <td className="">
+                                    <p className="text-[16px] font-bold text-responseColor tracking-[.25em]">{password}</p>
+                                </td>
+                            </tr>}
+                        <tr>
+                            <td></td>
+                            <td>
+                            <div className="flex flex-row-reverse">
+                                    <AdminDefaultButton text="パスワードを再発行する" buttonClick={handleClickOpen} />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td className="pb-[22px] text-right">
                                 <p className="text-[16px] font-bold pr-[56px] ">
-                                    パスワード
+                                    口腔清掃状態
                                 </p>
                             </td>
-                            <td>
-                                <p className="text-[16px] font-bold text-responseColor tracking-[.25em]">{password}</p>
+                            <td className="pb-[22px]">
+                            {selectuser.value==null?<p></p>: <p className="text-[16px] font-bold text-responseColor tracking-[.25em]">{ getstate(selectuser.value.toString())}</p>}
                             </td>
-                        </tr>}
+                        </tr>
                     </tbody>
                 </table>
                 <div className="flex flex-row-reverse">
-                        <AdminDefaultButton text="パスワードを再発行する" buttonClick={handleClickOpen} />
                     <Dialog
                         open={open}
                         onClose={handleClose}
@@ -301,27 +319,7 @@ const PatientEdit = () => {
                     <AdminDefaultButton text="保存" buttonClick={resetInfo} />
                 </div>
             </div>
-            <div className="basis-3/4 ml-[20px]  mt-[20px] flex flex-col">
-                <div className="bg-white w-full  pl-[68px]">
-                    <div className="flex items-center mb-[37px] ">
-                        <p className="text-[24px] font-bold mr-[20px]">
-                            サマリー
-                        </p>
-                        <NavLink to="../treatset">
-                            <AdminDefaultButton text="治療設定" buttonClick={() => { }} />
-                        </NavLink>
-                    </div>
-                    <div className="flex items-center pb-[55px]">
-                        {/* <p className="text-[16px] font-bold pr-[79px]">
-                            初回セルフ検査日
-                        </p>
-                        <p className="text-[16px] font-bold text-responseColor tracking-[.25em]  pr-[100px]">{selectuser.date}</p> */}
-                        <p className="text-[16px] font-bold pr-[79px]">
-                            セルフケアタイプ
-                        </p>
-                        <p className="text-[16px] font-bold text-responseColor tracking-[.25em]">{PROGRAM[Number(selectuser.type) - 1]}</p>
-                    </div>
-                </div>
+            <div className="basis-3/4 ml-[20px]  flex flex-col">
                 <div className="mt-[20px] h-full bg-white px-[68px] shrink">
                     <div className="flex justify-between mb-[37px] items-center">
                         <div className="flex items-center ">
