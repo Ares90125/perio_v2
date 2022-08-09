@@ -101,7 +101,7 @@ class LineController extends Controller
                 'client_secret' => 'f1c8db23ace8553aa78b7d9a0d8c672b',
         ]);
 
-
+        dd($response);
         $response1=Http::asForm()->post('https://api.line.me/oauth2/v2.1/verify', [
                 'id_token' => $response->json($key = null) ['id_token'],
                 'client_id' => '1657281804',
