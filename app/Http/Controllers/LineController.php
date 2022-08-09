@@ -103,7 +103,7 @@ class LineController extends Controller
 
         $response1=Http::asForm()->post('https://api.line.me/oauth2/v2.1/verify', [
                 'id_token' => $response->json($key = null) ['id_token'],
-                'client_id' => '1657281804',
+                'client_id' => '1657368344',
         ]);
         $update['LineId'] =$response1->json($key = null)["sub"];
         $data=Users::Where([
