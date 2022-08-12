@@ -112,7 +112,7 @@ class ClientAuthController extends Controller
             $breshcout->save();
         }
         if($user['LineId']!="0"){
-            (new LineController)->pushmessages($user->LineId,"おすすめのセルフケア動画です。動画を視聴してセルフケアのやり方を確認してください。\nhttp://dm-tmdu-crpe22.doctorbook-dev.jpresh/client/home/email/");
+            (new LineController)->pushmessages($user->LineId,"おすすめのセルフケア動画です。動画を視聴してセルフケアのやり方を確認してください。\nhttp://dm.tmdu-crpe22.jp/.jpresh/client/home/email/");
         }
         return response()->json(['success' => true], 200);
     }
