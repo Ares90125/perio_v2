@@ -29,7 +29,7 @@ class LineController extends Controller
             $userID = $user->LineId;
             $selfcheckday = Carbon::parse(now())->diffInDays(Carbon::parse(strtotime(substr($user->created_at,0,10))));
             if(($selfcheckday%7)==6){
-                $this->pushmessages($userID,"明日はセルフ検査日です。忘れずにセルフ検査を行いましょう。\nhttp://dm.tmdu-crpe22.jp/.jp/client/home/email/");
+                $this->pushmessages($userID,"明日はセルフ検査日です。忘れずにセルフ検査を行いましょう。\nhttp://dm.tmdu-crpe22.jp/client/home/email/");
             }
         }
     }
@@ -42,16 +42,16 @@ class LineController extends Controller
             $userID = $user->LineId;
             $selfcheckday = Carbon::parse(now())->diffInDays(Carbon::parse(strtotime(substr($user->created_at,0,10))));
             if($selfcheckday>6&&(($selfcheckday%7)==0)){
-                $this->pushmessages($userID,"セルフ検査実施日です。忘れずにセルフ検査を行いましょう。\nhttp://dm.tmdu-crpe22.jp/.jp/client/home/email/");
+                $this->pushmessages($userID,"セルフ検査実施日です。忘れずにセルフ検査を行いましょう。\nhttp://dm.tmdu-crpe22.jp/client/home/email/");
             }else if($selfcheckday>6&&(($selfcheckday%7)==1)){
-                $this->pushmessages($userID,"昨日はセルフ検査を忘れてしまいましたか？忘れてしまった場合は、今日は忘れずに行いましょう。検査をして結果を記録していない場合は、検査結果を記録しましょう。\nhttp://dm.tmdu-crpe22.jp/.jp/client/home/email/");
+                $this->pushmessages($userID,"昨日はセルフ検査を忘れてしまいましたか？忘れてしまった場合は、今日は忘れずに行いましょう。検査をして結果を記録していない場合は、検査結果を記録しましょう。\nhttp://dm.tmdu-crpe22.jp/client/home/email/");
             }
             // $count=Data::Where([
             //     'userid'  => $user->id,
             //     'date'  => date('Y-m-d', strtotime('-1 day')),
             //     "type"  => 2,
             // ])->count();
-            // $this->pushmessages($userID,"昨日のあなたの歯磨き回数は".$count."回でした。\nhttp://dm.tmdu-crpe22.jp/.jp/client/home/email/");
+            // $this->pushmessages($userID,"昨日のあなたの歯磨き回数は".$count."回でした。\nhttp://dm.tmdu-crpe22.jp/client/home/email/");
         }
     }
     public function SearchEVMessages(){
@@ -78,7 +78,7 @@ class LineController extends Controller
                 ])->first();
                 if(!$isinvitevbreshcount&&((strtotime('now')-strtotime($startbreshtime))<=60)){
                     // DB::table('test')->delete();
-                    $this->pushmessages($userID,"歯磨きは終わりましたか？忘れずに歯磨き記録を入力しましょう。\n http://dm.tmdu-crpe22.jp/.jp/client/home/register/bresh");
+                    $this->pushmessages($userID,"歯磨きは終わりましたか？忘れずに歯磨き記録を入力しましょう。\n http://dm.tmdu-crpe22.jp/client/home/register/bresh");
                 }
             }
         }
@@ -96,7 +96,7 @@ class LineController extends Controller
         $response = Http::asForm()->post('https://api.line.me/oauth2/v2.1/token', [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
-                'redirect_uri' => 'http://dm.tmdu-crpe22.jp/.jp/linelogin',
+                'redirect_uri' => 'http://dm.tmdu-crpe22.jp/linelogin',
                 'client_id' => '1657368344',
                 'client_secret' => '33181ef0f210bcd9e2550ac1310f6ad4',
         ]);
