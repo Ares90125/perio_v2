@@ -63,7 +63,7 @@ const Bresh = () => {
         <div>
             <p className="text-3xl text-mainColor py-4 font-black text-center pb-2">{ "登録をする"}</p>
             <p className="text-base text-mainColor pt-2 font-light text-center pb-2">{"普段の歯磨きはどのように行っていますか？"}</p>
-            <TypeHeader text="食事"/>
+            <TypeHeader text="歯みがき"/>
             <div className="mx-4">
                 <div >
                     <div className="mt-8">
